@@ -27,7 +27,17 @@ jobs:
         python manage.py test
 
   build:
-    echo: "build start"
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: echo "building"
+    - run: echo "build done"
 
   deploy:
-    echo: "deploy start"
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: echo "deploying"
+    - run: echo "deployment done"

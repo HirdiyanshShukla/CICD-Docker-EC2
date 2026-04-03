@@ -1,0 +1,20 @@
+# Git and Docker configurations
+.git/
+.gitignore
+.dockerignore
+Dockerfile
+
+# Environments
+venv/
+env/
+.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+
+# Local Database
+db.sqlite3
+
+# OS generated files
+.DS_Store

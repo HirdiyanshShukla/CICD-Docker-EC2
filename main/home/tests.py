@@ -14,8 +14,10 @@ class HomeViewTests(TestCase):
         response = self.client.get(url)
         self.assertTemplateUsed(response, 'home/index.html')
 
-    def test_index_view_contains_welcome_text(self):
-        """Test that the index view contains the expected text."""
+    def test_index_view_contains_tic_tac_toe(self):
+        """Test that the index view contains the Tic Tac Toe game."""
         url = reverse('index')
         response = self.client.get(url)
-        self.assertContains(response, "Welcome to Home!")
+        self.assertContains(response, "Tic Tac Toe")
+        self.assertContains(response, "Restart Game")
+        self.assertContains(response, 'id="board"')

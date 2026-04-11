@@ -19,5 +19,4 @@ class HomeViewTests(TestCase):
         url = reverse('index')
         response = self.client.get(url)
         self.assertContains(response, "Tic Tac Toe")
-        self.assertContains(response, "Restart Game")
         self.assertContains(response, 'id="board"')

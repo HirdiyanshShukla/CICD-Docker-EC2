@@ -110,7 +110,6 @@
             <div class="cell" onclick="makeMove(7)" data-index="7" id="cell-7"></div>
             <div class="cell" onclick="makeMove(8)" data-index="8" id="cell-8"></div>
         </div>
-        <button onclick="resetBoard()">Restart Game</button>
     </div>
 
     <script>
@@ -148,12 +147,20 @@
             if (roundWon) {
                 statusElement.innerText = `Player ${currentPlayer} Wins!`;
                 gameActive = false;
+                setTimeout(() => {
+                    alert(`Player ${currentPlayer} Wins!`);
+                    resetBoard();
+                }, 100);
                 return;
             }
 
             if (!board.includes("")) {
                 statusElement.innerText = "It's a Draw!";
                 gameActive = false;
+                setTimeout(() => {
+                    alert("It's a Draw!");
+                    resetBoard();
+                }, 100);
                 return;
             }
 

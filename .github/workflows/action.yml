@@ -58,7 +58,7 @@ jobs:
     - name: Push Docker Image to ECR
       run: |
         docker push 235130525963.dkr.ecr.ap-south-1.amazonaws.com/cicd-test/django-app:${{ github.sha }}
-          docker push 235130525963.dkr.ecr.ap-south-1.amazonaws.com/cicd-test/django-app:latest
+        docker push 235130525963.dkr.ecr.ap-south-1.amazonaws.com/cicd-test/django-app:latest
 
   deploy:
       needs: build
@@ -86,7 +86,7 @@ jobs:
 
       - name: Update kubeconfig and create resources
         run: |
-          aws eks update-kubeconfig --region ap-south-1 --name cicd-cluster
+          aws eks update-kubeconfig --region ap-south-1 --name my-eks-cluster
           kubectl apply -f kind/namespace.yml
           kubectl apply -f kind/deployment.yml
           kubectl apply -f kind/service.yml

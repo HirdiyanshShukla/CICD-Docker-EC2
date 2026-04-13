@@ -31,6 +31,7 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    
     permissions:
       id-token: write
       contents: read
@@ -90,5 +91,3 @@ jobs:
           kubectl apply -f kind/namespace.yml
           kubectl apply -f kind/deployment.yml
           kubectl apply -f kind/service.yml
-          
-

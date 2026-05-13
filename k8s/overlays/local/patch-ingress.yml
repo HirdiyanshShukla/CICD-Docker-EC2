@@ -1,0 +1,8 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: django-app-ns
+  name: django-app
+spec:
+  rules:
+    - host: django-app.local

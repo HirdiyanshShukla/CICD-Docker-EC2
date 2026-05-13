@@ -1,0 +1,8 @@
+resources:
+  - ../../base
+images:
+  - name: django-app
+    newName: django-app
+    newTag: latest
+patches:
+  - path: patch-ingress.yml

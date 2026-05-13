@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: django-app-ns
+  name: django-app
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  rules:
+    - host: django-app.production.com
+  tls:
+    - hosts:
+        - django-app.production.com
+      secretName: django-app-tls

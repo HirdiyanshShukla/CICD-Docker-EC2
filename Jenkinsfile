@@ -4,7 +4,7 @@ pipeline {
 
     // We inject your CLI's dynamic variables right into the Jenkins environment!
     environment {
-        APP_NAME = 'django-app'
+        APP_NAME = '{{ .app_name }}'
         // Because we mounted the docker.sock, Jenkins uses your laptop's Docker engine.
         // Therefore, 'localhost:5001' perfectly maps to your local registry!
         REGISTRY = 'localhost:5001' 
@@ -22,8 +22,8 @@ pipeline {
             steps {
                 // Industry Standard: Run tests INSIDE the newly built container 
                 // to guarantee the environment exactly matches production!
-                echo "Running tests: python main/manage.py test"
-                sh "docker run --rm ${APP_NAME}:latest sh -c 'python main/manage.py test || true'"
+                echo "Running tests: {{ .test_command }}"
+                sh "docker run --rm ${APP_NAME}:latest sh -c '{{ .test_command }} || true'"
             }
         }
 
@@ -57,8 +57,7 @@ pipeline {
                     
                     // 2. The Universal Pipe: Compile the YAML and stream it directly to the local cluster!
                     sh """
-                    kustomize build k8s/overlays/prod | docker run -i --rm \\
-                      --network host \\
+                    kustomize build k8s/overlays/prod | docker run -i --rm -u root --network host \\
                       -v ${env.HOST_HOME}/.kube/config:/.kube/config \\
                       -e KUBECONFIG=/.kube/config \\
                       bitnami/kubectl apply -f -

@@ -4,7 +4,7 @@ pipeline {
 
     // We inject your CLI's dynamic variables right into the Jenkins environment!
     environment {
-        APP_NAME = '{{ .app_name }}'
+        APP_NAME = 'django-app'
         // Because we mounted the docker.sock, Jenkins uses your laptop's Docker engine.
         // Therefore, 'localhost:5001' perfectly maps to your local registry!
         REGISTRY = 'localhost:5001' 
@@ -22,8 +22,8 @@ pipeline {
             steps {
                 // Industry Standard: Run tests INSIDE the newly built container 
                 // to guarantee the environment exactly matches production!
-                echo "Running tests: {{ .test_command }}"
-                sh "docker run --rm ${APP_NAME}:latest sh -c '{{ .test_command }} || true'"
+                echo "Running tests: python main/manage.py test"
+                sh "docker run --rm ${APP_NAME}:latest sh -c 'python main/manage.py test || true'"
             }
         }
 

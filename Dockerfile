@@ -8,11 +8,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Create a non-root user
-RUN useradd -m appuser
+RUN useradd -m appuser && \
+    mkdir -p /data && \
+    chown -R appuser:appuser /app /data
 
-# Give the non-root user explicit ownership of the working directory so it can create/modify the sqlite3 database
-RUN chown -R appuser:appuser /app
-
+ENV DATABASE_PATH=/data/db.sqlite3
 # Switch to the non-root user
 USER appuser
 

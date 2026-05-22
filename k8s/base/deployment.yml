@@ -25,7 +25,7 @@ spec:
         
       containers:
         - name: django-app
-          image: localhost:5001/django-app:latest
+          image: local-registry:5000/django-app:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000

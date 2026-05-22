@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         APP_NAME = 'django-app'
-        REGISTRY = 'localhost:5001'
+        REGISTRY = 'local-registry:5000'
     }
 
     stages {
@@ -63,7 +63,7 @@ pipeline {
                 script {
                     sh """
                     cd k8s/base && \
-                    kustomize edit set image localhost:5001/${APP_NAME}:latest=${REGISTRY}/${APP_NAME}:${env.GIT_SHA}
+                    kustomize edit set image local-registry:5000/${APP_NAME}:latest=${REGISTRY}/${APP_NAME}:${env.GIT_SHA}
                     """
 
                     sh """
